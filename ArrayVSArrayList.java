@@ -1,4 +1,4 @@
-import java.lang.reflect.Array;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -19,11 +19,12 @@ public class ArrayVSArrayList {
         String[] array =new String[10];
         ArrayList<String> arrayList =new ArrayList<>();
 
-        
 
         //Instantiating with values
         String[] arrayb=new String[] {"Pedro", "pablo","Irma"};
         String[] arrayc= {"Pedro","Pablo","Irma"}; //anonymous array 
+
+        List<String> test =Arrays.asList(arrayb);
 
         ArrayList<String> arrayList2=new ArrayList<>(List.of("Karina","Veronica","Yaneth"));
 
