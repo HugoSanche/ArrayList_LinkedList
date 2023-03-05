@@ -7,7 +7,8 @@ public class LinkedList_Example1 {
         list.add(0,"Veronica");
         addElements(list);
         System.out.println(list);
-        removeElements(list);
+        //removeElements(list);
+        gettingElement(list);
     }
     public static void addElements(LinkedList<String> list){
         list.addFirst("Diana");
@@ -62,5 +63,19 @@ public class LinkedList_Example1 {
 
         list.pop();//remove the last element
         System.out.println(list);
+    }
+    public static void gettingElement(LinkedList<String> list){
+        System.out.println("First element "+list.get(0));
+        System.out.println("First element "+list.getFirst());
+        System.out.println("First last element "+list.getLast());
+        System.out.println("The position of Hugo "+list.indexOf("Hugo"));
+        System.out.println("The position of keira "+list.indexOf("Keira"));
+
+        System.out.println("*************************");
+        System.out.println("Element "+list.element());
+        System.out.println("Peek "+list.peek());
+        System.out.println("Peek First "+list.peekFirst());
+        System.out.println("Peek Last "+list.peekLast());
+
     }
 }
