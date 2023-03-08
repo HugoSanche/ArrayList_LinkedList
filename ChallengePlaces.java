@@ -3,7 +3,6 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.Scanner;
 
-
 public class ChallengePlaces {
     static  Scanner scan =new Scanner(System.in);
     public static void main(String[] args) {
@@ -64,7 +63,7 @@ public class ChallengePlaces {
      
     }
 
-    public static void printPlaces(LinkedList<Places> list){
+    private static void printPlaces(LinkedList<Places> list){
         System.out.println();
         var iterator =list.iterator();
         while(iterator.hasNext()){
@@ -74,28 +73,32 @@ public class ChallengePlaces {
         }
         System.out.println();
     }
-    public static void addCity(Places[] arrayPlaces, LinkedList<Places> listPlaces){    
-        for (Places town :arrayPlaces ) {
-            if (listPlaces.indexOf(town) < 0) 
-                listPlaces.add(town);
-        }
-     }
-     public static void addCity2(Places places, LinkedList<Places> listPlaces){    
+     private static void addCity2(Places places, LinkedList<Places> listPlaces){    
+        //check if places in listPlaces 
         if (listPlaces.contains(places)){
-            System.out.println("Duplicate "+places);
+            System.out.println("Duplicate 1"+places);
             return;
         }
-        for (Places p : listPlaces) {
-            if (p.getTown().equalsIgnoreCase(places.getTown())) {
-                System.out.println("Found duplicate2: " + places);
+        //verify if place name is equal to list name of listPlaces
+        for(Places p:listPlaces){
+            if(p.getTown().equalsIgnoreCase(places.getTown())){
+                System.out.println("Duplicate name 2"+places);
                 return;
             }
         }
+        int index=0; 
+        //order by distance.- 
+        for (Places list:listPlaces){
+            if(places.getDistance()<list.getDistance()){
+                listPlaces.add(index,places);
+                return;
+            }
+            index++;
+        }
         listPlaces.add(places);
-        // for (Places p: places )
      }
 
-     public static void printMenu(){
+     private static void printMenu(){
         String textBlock="""
             Avaliable Actions
             (F)orward
@@ -106,24 +109,22 @@ public class ChallengePlaces {
              """;
             System.out.println(textBlock+" ");
     }
-    public static void  backward(ListIterator<Places> iterator){
-       System.out.println(iterator.hasPrevious());
+    private static void  backward(ListIterator<Places> iterator){
        if(iterator.hasPrevious()){
             var location= iterator.previous();
             System.out.println("we are in "+location);
        }
        else{
-        System.out.println("We are in "+iterator.next()/*+iterator.previous()+" distance= "+iterator.next().getDistance()*/);
+        System.out.println("Originating : "+iterator.next()/*+iterator.previous()+" distance= "+iterator.next().getDistance()*/);
        }   
     }
-    public static void  forward( ListIterator<Places> iterator ){
-        System.out.println(iterator.hasNext());
+    private static void  forward( ListIterator<Places> iterator ){
         if (iterator.hasNext()){
             var location=  iterator.next();
-            System.out.println("We are in "+location);
+            System.out.println("We are in :"+location);
         }
         else{
-            System.out.println("We are in "+iterator.previous());
+            System.out.println("Final Destination : "+iterator.previous());
         }
     }
 
