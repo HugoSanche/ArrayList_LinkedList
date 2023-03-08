@@ -7,16 +7,29 @@ import java.util.Scanner;
 public class ChallengePlaces {
     static  Scanner scan =new Scanner(System.in);
     public static void main(String[] args) {
-        Places[] places ={new Places("Sidney",0),
-                        new Places("Aline Springs",2771),
+        
+       /*  Places places ={new Places("Sidney",0),
+                        new Places("Alice Springs",2771),
                         new Places("Brisbane",917),
                         new Places("Darwin",3972),
                         new Places("Melbourne",877),
                         new Places("Perth",3923),
                         };
-        
+        */
+
         LinkedList<Places> myPlaces=new LinkedList<>();
-        addCity(places, myPlaces);
+        Places adeline=new Places ("Adelaid",1374);
+        
+        addCity2(adeline, myPlaces);
+        addCity2(new Places("Adelaid",1374), myPlaces);
+        addCity2(new Places("Sidney",0), myPlaces);
+        addCity2(new Places("Aline Springs",2771), myPlaces);  
+        addCity2(new Places("Brisbane",917), myPlaces);             
+        addCity2(new Places("Darwin",3972), myPlaces); 
+        addCity2(new Places("Melbourne",877), myPlaces); 
+        addCity2(new Places("Perth",3923), myPlaces); 
+        addCity2(new Places("perth",3923), myPlaces);
+
         ListIterator<Places> iterator=myPlaces.listIterator();
         iterator.hasNext();              
         boolean flag=true;
@@ -27,11 +40,11 @@ public class ChallengePlaces {
             switch(c){
              
                 case 'F':
-                    forward(myPlaces, iterator);
+                    forward( iterator);
                     //printPlaces(myPlaces);
                     break;
                 case 'B':
-                    backward(myPlaces, iterator);
+                    backward( iterator);
                     //print(myItems);
                     break;
                 case 'L':
@@ -54,7 +67,6 @@ public class ChallengePlaces {
     public static void printPlaces(LinkedList<Places> list){
         System.out.println();
         var iterator =list.iterator();
-        Places lastPlace=list.getFirst();
         while(iterator.hasNext()){
             var nextCity=iterator.next();
             System.out.println("Ciudad "+nextCity.getTown()+" Distancia " +nextCity.getDistance());
@@ -68,6 +80,21 @@ public class ChallengePlaces {
                 listPlaces.add(town);
         }
      }
+     public static void addCity2(Places places, LinkedList<Places> listPlaces){    
+        if (listPlaces.contains(places)){
+            System.out.println("Duplicate "+places);
+            return;
+        }
+        for (Places p : listPlaces) {
+            if (p.getTown().equalsIgnoreCase(places.getTown())) {
+                System.out.println("Found duplicate2: " + places);
+                return;
+            }
+        }
+        listPlaces.add(places);
+        // for (Places p: places )
+     }
+
      public static void printMenu(){
         String textBlock="""
             Avaliable Actions
@@ -79,7 +106,7 @@ public class ChallengePlaces {
              """;
             System.out.println(textBlock+" ");
     }
-    public static void  backward(LinkedList<Places> list, ListIterator<Places> iterator){
+    public static void  backward(ListIterator<Places> iterator){
        System.out.println(iterator.hasPrevious());
        if(iterator.hasPrevious()){
             var location= iterator.previous();
@@ -89,7 +116,7 @@ public class ChallengePlaces {
         System.out.println("We are in "+iterator.next()/*+iterator.previous()+" distance= "+iterator.next().getDistance()*/);
        }   
     }
-    public static void  forward(LinkedList<Places> list, ListIterator<Places> iterator ){
+    public static void  forward( ListIterator<Places> iterator ){
         System.out.println(iterator.hasNext());
         if (iterator.hasNext()){
             var location=  iterator.next();
